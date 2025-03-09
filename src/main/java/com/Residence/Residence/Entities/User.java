@@ -4,17 +4,16 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users", 
-    uniqueConstraints = { 
-      @UniqueConstraint(columnNames = "username"),
-      @UniqueConstraint(columnNames = "email") 
-    })
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
   @Id
@@ -22,22 +21,22 @@ public class User {
   private Long id;
 
   @NotBlank
-  @Size(max = 20)
-  private String username;
+  @Size(max = 50) // Increase size to accommodate full names
+  private String username; // Will store the full name (e.g., "John Doe")
 
   @NotBlank
   @Size(max = 50)
   @Email
   private String email;
 
-  @NotBlank
+
   @Size(max = 120)
   private String password;
 
   @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(  name = "user_roles", 
-        joinColumns = @JoinColumn(name = "user_id"), 
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @JoinTable(  name = "user_roles",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
   public User() {
@@ -49,6 +48,7 @@ public class User {
     this.password = password;
   }
 
+  // Getters and Setters
   public Long getId() {
     return id;
   }
@@ -92,9 +92,9 @@ public class User {
   @Override
   public String toString() {
     return "User{" +
-            "email='" + email + '\'' +
-            ", id=" + id +
+            "id=" + id +
             ", username='" + username + '\'' +
+            ", email='" + email + '\'' +
             ", password='" + password + '\'' +
             ", roles=" + roles +
             '}';

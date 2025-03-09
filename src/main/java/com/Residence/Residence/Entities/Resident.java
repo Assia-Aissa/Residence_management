@@ -1,31 +1,17 @@
 package com.Residence.Residence.Entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Resident {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nom;
-    private String prenom;
-
-    @Column(unique = true, nullable = false)
-    private String email;
-
+public class Resident extends User {
     private String telephone;
     private String adresse;
-    //private Date dateNaissance;
-
-
 
     @OneToMany(mappedBy = "resident")
     private List<Paiement> historiquePaiements;
@@ -36,42 +22,21 @@ public class Resident {
     @OneToOne
     private Chambre chambre;
 
+    // Getters and Setters
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     public String getAdresse() {
         return adresse;
     }
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
-    }
-
-    public Chambre getChambre() {
-        return chambre;
-    }
-
-    @Override
-    public String toString() {
-        return "Resident{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", email='" + email + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", adresse='" + adresse + '\'' +
-
-                ", chambre=" + (chambre != null ? chambre.getId() : "null") +
-                '}';
-    }
-    public void setChambre(Chambre chambre) {
-        this.chambre = chambre;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public List<Paiement> getHistoriquePaiements() {
@@ -90,35 +55,22 @@ public class Resident {
         this.historiqueRequetes = historiqueRequetes;
     }
 
-    public Long getId() {
-        return id;
+    public Chambre getChambre() {
+        return chambre;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setChambre(Chambre chambre) {
+        this.chambre = chambre;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    @Override
+    public String toString() {
+        return "Resident{" +
+                "adresse='" + adresse + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", historiquePaiements=" + historiquePaiements +
+                ", historiqueRequetes=" + historiqueRequetes +
+                ", chambre=" + chambre +
+                '}';
     }
 }

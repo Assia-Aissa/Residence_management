@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @Service
 public class PdfService {
-
+/*
     public byte[] generatePdf(Paiement paiement) throws DocumentException, IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Document document = new Document();
@@ -28,5 +28,5 @@ public class PdfService {
         document.close();
 
         return outputStream.toByteArray();
-    }
+    }*/
 }

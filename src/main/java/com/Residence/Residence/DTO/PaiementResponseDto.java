@@ -13,8 +13,7 @@ public class PaiementResponseDto {
     private String recu;
     private String recuUrl; // Add this field
     private Long residentId;
-    private String residentNom;
-    private String residentPrenom;
+    private String residentUsername;
 
     // Getters and Setters
     public Long getId() {
@@ -73,20 +72,11 @@ public class PaiementResponseDto {
         this.residentId = residentId;
     }
 
-    public String getResidentNom() {
-        return residentNom;
+    public String getResidentUsername() {
+        return residentUsername;
     }
 
-
-    public void setResidentNom(String residentNom) {
-        this.residentNom = residentNom;
-    }
-
-    public String getResidentPrenom() {
-        return residentPrenom;
-    }
-
-    public void setResidentPrenom(String residentPrenom) {
-        this.residentPrenom = residentPrenom;
+    public void setResidentUsername(String residentUsername) {
+        this.residentUsername = residentUsername;
     }
 }

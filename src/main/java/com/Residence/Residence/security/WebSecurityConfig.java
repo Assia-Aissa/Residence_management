@@ -33,9 +33,7 @@ public class WebSecurityConfig {
                 .cors(cors -> {}) // Enable CORS
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Disable sessions
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Allow access to authentication endpoints
-                        .requestMatchers("/chambres/**", "/residents/**").permitAll() // Allow access to all chambre and resident endpoints
-                        .anyRequest().authenticated() // All other requests require authentication
+                        .anyRequest().permitAll() // Allow access to all endpoints without authentication
                 );
 
         return http.build();

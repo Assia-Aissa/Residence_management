@@ -18,10 +18,9 @@ public class PaiementRequestDto {
     private Date datePaiement; // Payment date
 
     @NotBlank(message = "Resident name is required")
-    private String residentNom; // Resident's last name
+    private String residentUsername; // Resident's last name
 
-    @NotBlank(message = "Resident first name is required")
-    private String residentPrenom; // Resident's first name
+
 
     // Getters and Setters
     public double getMontantPaye() {
@@ -48,19 +47,11 @@ public class PaiementRequestDto {
         this.datePaiement = datePaiement;
     }
 
-    public String getResidentNom() {
-        return residentNom;
+    public @NotBlank(message = "Resident name is required") String getResidentUsername() {
+        return residentUsername;
     }
 
-    public void setResidentNom(String residentNom) {
-        this.residentNom = residentNom;
-    }
-
-    public String getResidentPrenom() {
-        return residentPrenom;
-    }
-
-    public void setResidentPrenom(String residentPrenom) {
-        this.residentPrenom = residentPrenom;
+    public void setResidentUsername(@NotBlank(message = "Resident name is required") String residentUsername) {
+        this.residentUsername = residentUsername;
     }
 }

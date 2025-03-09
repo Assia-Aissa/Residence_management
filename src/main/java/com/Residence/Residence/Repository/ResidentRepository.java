@@ -10,8 +10,8 @@ import java.util.Optional;
 @Repository
 public interface ResidentRepository extends JpaRepository<Resident, Long> {
     boolean existsByEmail(String email);
-    Optional<Resident> findByNomAndPrenom(String nom, String prenom);
 
+    Optional<Resident> findByUsername(String username);
     @Query("SELECT COUNT(r) FROM Resident r")
     long countAllResidents();
 }

@@ -8,8 +8,7 @@ public class RequeteMaintenanceResponseDTO {
     private String description;
     private Date dateSignalement;
     private StatutRequete statut;
-    private String residentNom; // Resident's last name
-    private String residentPrenom; // Resident's first name
+    private String residentUsername;
     private String chambreNumber; // Chambre number
 
     // Getters and Setters
@@ -45,20 +44,12 @@ public class RequeteMaintenanceResponseDTO {
         this.statut = statut;
     }
 
-    public String getResidentNom() {
-        return residentNom;
+    public String getResidentUsername() {
+        return residentUsername;
     }
 
-    public void setResidentNom(String residentNom) {
-        this.residentNom = residentNom;
-    }
-
-    public String getResidentPrenom() {
-        return residentPrenom;
-    }
-
-    public void setResidentPrenom(String residentPrenom) {
-        this.residentPrenom = residentPrenom;
+    public void setResidentUsername(String residentUsername) {
+        this.residentUsername = residentUsername;
     }
 
     public String getChambreNumber() {

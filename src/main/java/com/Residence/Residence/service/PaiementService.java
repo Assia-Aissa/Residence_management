@@ -6,12 +6,10 @@ import com.Residence.Residence.Entities.Paiement;
 import com.Residence.Residence.Entities.Resident;
 import com.Residence.Residence.Repository.PaiementRepository;
 import com.Residence.Residence.Repository.ResidentRepository;
-import com.itextpdf.text.DocumentException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,8 +30,8 @@ public class PaiementService {
     }
 
     public PaiementResponseDto save(PaiementRequestDto requestDTO) {
-        // Find the resident by nom and prenom
-        Resident resident = residentRepository.findByNomAndPrenom(requestDTO.getResidentNom(), requestDTO.getResidentPrenom())
+        // Find the resident by username
+        Resident resident = residentRepository.findByUsername(requestDTO.getResidentUsername())
                 .orElseThrow(() -> new RuntimeException("Resident not found"));
 
         // Create and save the payment
@@ -42,12 +40,13 @@ public class PaiementService {
         paiement.setStatut(requestDTO.getStatut());
         paiement.setDatePaiement(requestDTO.getDatePaiement());
         paiement.setResident(resident);
-        System.out.println("--------------->"+paiement);
+        System.out.println("--------------->" + paiement);
 
         Paiement savedPaiement = paiementRepository.save(paiement);
-        System.out.println("--------------->"+savedPaiement);
+        System.out.println("--------------->" + savedPaiement);
         return mapToResponseDto(savedPaiement);
     }
+
     public byte[] getRecu(Long id) {
         Paiement paiement = paiementRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paiement not found"));
@@ -62,8 +61,8 @@ public class PaiementService {
         responseDTO.setDatePaiement(paiement.getDatePaiement());
         responseDTO.setRecuUrl("/paiements/" + paiement.getId() + "/recu");
         responseDTO.setResidentId(paiement.getResident().getId());
-        responseDTO.setResidentNom(paiement.getResident().getNom());
-        responseDTO.setResidentPrenom(paiement.getResident().getPrenom());
+        responseDTO.setResidentUsername(paiement.getResident().getUsername()); // Fixed: Using setter
+
         return responseDTO;
     }
 
@@ -91,8 +90,8 @@ public class PaiementService {
             Paiement paiement = paiementOptional.get();
             modelMapper.map(paiementRequestDto, paiement);
 
-            // Find the resident by nom and prenom
-            Resident resident = residentRepository.findByNomAndPrenom(paiementRequestDto.getResidentNom(), paiementRequestDto.getResidentPrenom())
+            // Find the resident by username
+            Resident resident = residentRepository.findByUsername(paiementRequestDto.getResidentUsername())
                     .orElseThrow(() -> new RuntimeException("Resident not found"));
             paiement.setResident(resident);
 
@@ -102,6 +101,7 @@ public class PaiementService {
             throw new RuntimeException("Paiement not found");
         }
     }
+
     public void delete(Long id) {
         paiementRepository.deleteById(id);
     }

@@ -13,6 +13,16 @@ public class ChambreResponseDto {
         private String equipements;
         private StatutChambre statut;
 
+    @Override
+    public String toString() {
+        return "ChambreResponseDto{" +
+                "equipements='" + equipements + '\'' +
+                ", id=" + id +
+                ", numero='" + numero + '\'' +
+                ", taille=" + taille +
+                ", statut=" + statut +
+                '}';
+    }
 
     // Getters and Setters
         public Long getId() {

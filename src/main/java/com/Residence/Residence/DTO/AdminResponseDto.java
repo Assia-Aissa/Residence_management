@@ -3,52 +3,41 @@ package com.Residence.Residence.DTO;
 import com.Residence.Residence.Entities.ERole;
 
 public class AdminResponseDto {
+    private Long id;
+    private String username; // Full name (e.g., "John Doe")
+    private String email;
+    private ERole role;
 
-        private Long id;
-        private String nom;
-        private String prenom;
-        private String email;
-        private ERole role;
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-        // Getters and Setters
-        public Long getId() {
-            return id;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    public String getUsername() {
+        return username;
+    }
 
-        public String getNom() {
-            return nom;
-        }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-        public void setNom(String nom) {
-            this.nom = nom;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public String getPrenom() {
-            return prenom;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public void setPrenom(String prenom) {
-            this.prenom = prenom;
-        }
+    public ERole getRole() {
+        return role;
+    }
 
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public ERole getRole() {
-            return role;
-        }
-
-        public void setRole(ERole role) {
-            this.role = role;
-        }
-
+    public void setRole(ERole role) {
+        this.role = role;
+    }
 }

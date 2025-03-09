@@ -4,7 +4,6 @@ import com.Residence.Residence.DTO.ResidentRequestDto;
 import com.Residence.Residence.DTO.ResidentResponseDto;
 import com.Residence.Residence.service.ResidentService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
-
 @RestController
 @RequestMapping("/residents")
 public class ResidentController {

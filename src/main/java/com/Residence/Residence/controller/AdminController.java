@@ -1,6 +1,5 @@
 package com.Residence.Residence.controller;
 
-
 import com.Residence.Residence.DTO.AdminRequestDto;
 import com.Residence.Residence.DTO.AdminResponseDto;
 import com.Residence.Residence.service.AdminService;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -20,14 +20,14 @@ public class AdminController {
     private AdminService adminService;
 
     // Create
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<AdminResponseDto> save(@Valid @RequestBody AdminRequestDto adminRequestDto) {
         AdminResponseDto adminResponseDto = adminService.save(adminRequestDto);
         return new ResponseEntity<>(adminResponseDto, HttpStatus.CREATED);
     }
 
     // Read All
-    @GetMapping
+    @GetMapping("/getall")
     public ResponseEntity<List<AdminResponseDto>> findAll() {
         List<AdminResponseDto> admins = adminService.findAll();
         return ResponseEntity.ok(admins);

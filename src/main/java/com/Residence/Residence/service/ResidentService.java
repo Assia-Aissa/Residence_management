@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @Service
 public class ResidentService {
 
@@ -58,14 +59,12 @@ public class ResidentService {
         Resident resident = modelMapper.map(residentRequestDto, Resident.class);
         resident.setChambre(chambre); // Assign the chambre to the resident
 
-        System.out.println("---------------->"+resident);
         // Save the resident
         Resident savedResident = residentRepository.save(resident);
-        System.out.println("----------------------->"+savedResident);
+
         // Map the saved resident to ResidentResponseDto
         ResidentResponseDto responseDto = modelMapper.map(savedResident, ResidentResponseDto.class);
         responseDto.setChambreNumber(savedResident.getChambre().getNumero());
-        System.out.println("--------------------====>"+responseDto);
 
         return responseDto;
     }

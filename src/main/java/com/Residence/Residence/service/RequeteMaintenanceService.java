@@ -30,10 +30,9 @@ public class RequeteMaintenanceService {
 
     // Create a new maintenance request
     public RequeteMaintenanceResponseDTO createRequeteMaintenance(RequeteMaintenanceRequestDTO requestDTO) {
-        // Fetch Resident by nom and prenom
-        Resident resident = residentRepository.findByNomAndPrenom(
-                requestDTO.getResidentNom(), requestDTO.getResidentPrenom()
-        ).orElseThrow(() -> new RuntimeException("Resident not found"));
+        // Fetch Resident by username
+        Resident resident = residentRepository.findByUsername(requestDTO.getResidentUsername())
+                .orElseThrow(() -> new RuntimeException("Resident not found with username: " + requestDTO.getResidentUsername()));
 
         // Fetch Chambre by number
         Chambre chambre = chambreRepository.findByNumero(requestDTO.getChambreNumber())
@@ -50,7 +49,6 @@ public class RequeteMaintenanceService {
         RequeteMaintenance savedRequete = requeteMaintenanceRepository.save(requeteMaintenance);
         return modelMapper.map(savedRequete, RequeteMaintenanceResponseDTO.class);
     }
-
     // Get all maintenance requests
     public List<RequeteMaintenanceResponseDTO> getAllRequeteMaintenances() {
         List<RequeteMaintenance> requetes = requeteMaintenanceRepository.findAll();
@@ -68,13 +66,13 @@ public class RequeteMaintenanceService {
 
     // Update a maintenance request
     public RequeteMaintenanceResponseDTO updateRequeteMaintenance(Long id, RequeteMaintenanceRequestDTO requestDTO) {
+        // Fetch the existing RequeteMaintenance by ID
         RequeteMaintenance existingRequete = requeteMaintenanceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("RequeteMaintenance not found"));
 
-        // Fetch Resident by nom and prenom
-        Resident resident = residentRepository.findByNomAndPrenom(
-                requestDTO.getResidentNom(), requestDTO.getResidentPrenom()
-        ).orElseThrow(() -> new RuntimeException("Resident not found"));
+        // Fetch Resident by username
+        Resident resident = residentRepository.findByUsername(requestDTO.getResidentUsername())
+                .orElseThrow(() -> new RuntimeException("Resident not found with username: " + requestDTO.getResidentUsername()));
 
         // Fetch Chambre by number
         Chambre chambre = chambreRepository.findByNumero(requestDTO.getChambreNumber())
@@ -91,7 +89,6 @@ public class RequeteMaintenanceService {
         RequeteMaintenance updatedRequete = requeteMaintenanceRepository.save(existingRequete);
         return modelMapper.map(updatedRequete, RequeteMaintenanceResponseDTO.class);
     }
-
     // Delete a maintenance request
     public void deleteRequeteMaintenance(Long id) {
         requeteMaintenanceRepository.deleteById(id);

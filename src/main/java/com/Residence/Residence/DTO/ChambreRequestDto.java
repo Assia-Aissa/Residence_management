@@ -11,7 +11,17 @@ public class ChambreRequestDto {
         private String equipements;
         private StatutChambre statut;
 
-        // Getters and Setters
+    @Override
+    public String toString() {
+        return "ChambreRequestDto{" +
+                "equipements='" + equipements + '\'' +
+                ", numero='" + numero + '\'' +
+                ", taille=" + taille +
+                ", statut=" + statut +
+                '}';
+    }
+
+    // Getters and Setters
         public String getNumero() {
             return numero;
         }
